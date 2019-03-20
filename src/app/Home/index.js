@@ -15,20 +15,22 @@ class Home extends Component {
                     click: 0
                 },
                 {
-                    title: 'Ideas',
-                    path: '/ideas',
+                    title: 'Concept',
+                    path: '/concept',
                     click: 0
                 }
             ]
         };
     }
 
-    activeButton = (e, key) => {
+    activeButton = (event, key) => {
+        const self = this;
+        const element = event.currentTarget;
         if (this.state.pages[key].click === 0) {
-            e.preventDefault();
+            event.preventDefault();
         }
 
-        e.currentTarget.parentElement.classList.add('active');
+        element.parentElement.classList.add('active');
 
         // update state
         const pages = this.state.pages;
@@ -36,7 +38,26 @@ class Home extends Component {
         this.setState({
             pages
         });
+
+        // emulate click after animation
+        setTimeout(() => {
+            self.clickSimulation(element);
+        }, 500)
     };
+
+    clickSimulation = (element) => {
+        const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
+        mouseClickEvents.forEach(mouseEventType =>
+            element.dispatchEvent(
+            new MouseEvent(mouseEventType, {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                buttons: 1
+            })
+            )
+        );
+    }
 
     render() {
         return (
@@ -45,7 +66,7 @@ class Home extends Component {
                     {this.state.pages.map((el, i) => {
                         const { title, path } = el;
                         return (
-                            <div key={i} className="link-wrapper">
+                            <div key={i} className="link-wrapper" ref={this.simulateClick}>
                                 <Link
                                     to={path}
                                     onClick={e => this.activeButton(e, i)}

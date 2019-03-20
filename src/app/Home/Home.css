@@ -21,7 +21,8 @@
 
 .homepage .link-wrapper.active {
     border: 5px;
-    box-shadow: 0 0 15px 5px #e3e3e3;
+    box-shadow: 0 0 25px 8px #e3e3e3;
+    transform: scale(.95);
 }
 
 .homepage .link-wrapper:nth-child(1) {
