@@ -42,22 +42,22 @@ class Home extends Component {
         // emulate click after animation
         setTimeout(() => {
             self.clickSimulation(element);
-        }, 500)
+        }, 500);
     };
 
-    clickSimulation = (element) => {
+    clickSimulation = element => {
         const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
         mouseClickEvents.forEach(mouseEventType =>
             element.dispatchEvent(
-            new MouseEvent(mouseEventType, {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-                buttons: 1
-            })
+                new MouseEvent(mouseEventType, {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    buttons: 1
+                })
             )
         );
-    }
+    };
 
     render() {
         return (
@@ -66,7 +66,11 @@ class Home extends Component {
                     {this.state.pages.map((el, i) => {
                         const { title, path } = el;
                         return (
-                            <div key={i} className="link-wrapper" ref={this.simulateClick}>
+                            <div
+                                key={i}
+                                className="link-wrapper"
+                                ref={this.simulateClick}
+                            >
                                 <Link
                                     to={path}
                                     onClick={e => this.activeButton(e, i)}

@@ -14,7 +14,7 @@ class App extends Component {
 
         this.state = {
             singlePage: true
-        }
+        };
 
         this.getMainpage = this.getMainpage.bind(this);
     }
@@ -24,7 +24,7 @@ class App extends Component {
             return About;
         }
         return Home;
-    }
+    };
 
     render() {
         const Main = this.getMainpage();
