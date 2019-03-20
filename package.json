@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cross-env": "^5.2.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.16.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
@@ -10,12 +13,18 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --verbose",
+    "eject": "react-scripts eject",
+    "test:staged": "cross-env CI=true react-scripts test",
+    "test:prettier": "prettier --check 'src/**/*.js' --write"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
+  "pre-commit": [
+    "test:staged",
+    "test:prettier"
+  ],
   "browserslist": [
     ">0.2%",
     "not dead",
