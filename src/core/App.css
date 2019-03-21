@@ -6,6 +6,7 @@ body {
     font-family: le-monde-livre-classic-byol, serif;
     font-weight: 400;
     font-style: normal;
+    text-rendering: optimizeLegibility;
 }
 
 .color-black {
@@ -48,6 +49,10 @@ body {
 }
 
 .page-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 0 100%;
+    justify-content: space-between;
     position: relative;
     padding: 0 20px 100px;
     z-index: 1;
@@ -56,6 +61,11 @@ body {
 .page-wrapper .page-title {
     font-size: 40px;
     margin: 10px 0;
+    width: 100%;
+}
+
+.page-wrapper .page-subtitle {
+    width: 100%;
 }
 
 .page-footer {
@@ -70,10 +80,14 @@ body {
     z-index: 1;
 }
 
+.button-label {
+    margin: 0 0 5px;
+}
+
 .button-contact {
-    display: block;
-    margin-top: 5px;
-    padding: 5px 0;
+    display: inline-block;
+    margin-top: 3px;
+    padding: 5px 20px;
     border: 1px solid #1a5791;
     box-shadow: 0 0 10px #1a5791;
     background: #1a5791;
