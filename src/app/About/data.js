@@ -2,20 +2,23 @@ import React from 'react';
 
 const skills = [
     {
-        animation: '',
+        animation: false,
         name: 'HTML',
+        url: 'html',
         star: 5,
         note: false
     },
     {
-        animation: '',
+        animation: false,
         name: 'CSS',
+        url: 'css',
         star: 4,
         note: false
     },
     {
-        animation: '',
+        animation: false,
         name: 'SCSS',
+        url: 'scss',
         star: 5,
         note: (
             <span>
@@ -26,8 +29,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'Less',
+        url: 'less',
         star: 4,
         note: (
             <span>
@@ -37,8 +41,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'JavaScript',
+        url: 'javascript',
         star: 5,
         note: (
             <span>
@@ -63,8 +68,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'React',
+        url: 'react',
         star: 4,
         note: (
             <span>
@@ -83,8 +89,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'VueJs',
+        url: 'vuejs',
         star: 3,
         note: (
             <span>
@@ -96,8 +103,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'NodeJs',
+        url: 'nodejs',
         star: 4,
         note: (
             <span>
@@ -118,8 +126,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'PHP',
+        url: 'php',
         star: 3,
         note: (
             <span>
@@ -130,8 +139,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'Linux',
+        url: 'linux',
         star: 3,
         note: (
             <span>
@@ -142,8 +152,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'Docker',
+        url: 'docker',
         star: 4,
         note: (
             <span>
@@ -154,8 +165,9 @@ const skills = [
         )
     },
     {
-        animation: '',
+        animation: false,
         name: 'Photoshop',
+        url: 'photoshop',
         star: 2,
         note: (
             <span>

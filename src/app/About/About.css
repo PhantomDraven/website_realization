@@ -1,4 +1,5 @@
 .section-skill {
+    position: relative;
     padding: 10px 0;
     width: 100%;
 }
@@ -12,19 +13,34 @@
 .section-skill.detail {
     opacity: 0;
     transition: 0.5s linear;
+    text-align: center;
+}
+
+.section-skill .button-back {
+    appearance: none;
+    background: transparent;
+    color: #1a5791;
+    margin: 30px auto 0;
+    padding: 10px 15px;
+    border: 0;
+    font-size: 14px;
 }
 
 .section-skill .section-title {
-    padding-bottom: 3px;
-    border-bottom: 1px solid #2e3532;
+    margin: 0;
+    padding: 0;
     font-size: 24px;
+    text-align: left;
 }
 
 .section-skill .section-content {
+    margin-top: 20px;
     position: relative;
+    text-align: left;
 }
 
 .section-skill .section-content ul {
+    margin-top: 0;
     padding: 10px 0 10px 40px;
 }
 
@@ -33,6 +49,10 @@
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     padding: 0;
     list-style: none;
+}
+
+.section-skill .section-content .section-details {
+    display: none;
 }
 
 .single-section-wrapper {
@@ -73,7 +93,12 @@
     color: #1a5791;
 }
 
+.single-section-wrapper a {
+    text-decoration: none;
+}
+
 .single-section-wrapper .section-info {
+    color: #ffffff;
     font-size: 16px;
 }
 
@@ -82,9 +107,5 @@
 }
 
 .single-section-wrapper .ranking {
-    display: none;
-}
-
-.section-skill .section-content .section-details {
     display: none;
 }

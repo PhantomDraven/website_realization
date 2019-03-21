@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { skills } from '../data';
 
 const activeSkillDefaultValue = {
@@ -19,19 +21,70 @@ class Skills extends Component {
             activeSkill: {
                 ...activeSkillDefaultValue
             },
+            pageTitle: 'Skills',
             skills: skills
         };
 
         this.getActive = this.getActive.bind(this);
-        this.handleDetails = this.handleDetails.bind(this);
-        this.hideDetails = this.hideDetails.bind(this);
+        this.getRequestedSkill = this.getRequestedSkill.bind(this);
         this.ranking = this.ranking.bind(this);
-        this.showDetails = this.showDetails.bind(this);
         this.timedSkils = this.timedSkils.bind(this);
+    }
+
+    componentWillMount() {
+        if (this.props.requestSkill) {
+            const saveState = this.state.activeSkill;
+            const { index, name, star, note } = this.getRequestedSkill(
+                this.props.requestSkill
+            );
+            saveState.active = true;
+            saveState.animation = true;
+            saveState.name = name;
+            saveState.star = star;
+            saveState.note = note;
+            saveState.index = index;
+            this.setState({
+                activeSkill: saveState,
+                animate: true
+            });
+        }
     }
 
     componentDidMount() {
         this.timedSkils();
+    }
+
+    getActive = () => {
+        const { active, name, note, animation } = this.state.activeSkill;
+        if (active) {
+            return (
+                <div
+                    className={
+                        'section-skill detail' +
+                        (animation ? ' animation-show' : '')
+                    }
+                >
+                    <h1 className="section-title">
+                        {this.state.pageTitle}: {name}
+                    </h1>
+                    <div className="section-content">{note}</div>
+                    <Link to="/about">
+                        <button className="button-back">Go back</button>
+                    </Link>
+                </div>
+            );
+        }
+        return null;
+    };
+
+    getRequestedSkill(request) {
+        const skills = this.state.skills;
+        for (let index = 0; index < skills.length; index++) {
+            const element = skills[index];
+            if (element.url === request) {
+                return { ...element, index };
+            }
+        }
     }
 
     ranking = evaluation => {
@@ -67,85 +120,13 @@ class Skills extends Component {
         }, 50);
     };
 
-    handleDetails = (enable, index) => {
-        if (this.state.activeSkill.active && enable !== 'less') {
-            this.hideDetails();
-            const self = this;
-            setTimeout(() => {
-                self.showDetails(index);
-            }, 250);
-        } else if (enable === 'less') {
-            this.hideDetails();
-        } else if (enable === 'more') {
-            this.showDetails(index);
-        }
-    };
-
-    showDetails = index => {
-        const { name, star, note } = this.state.skills[index];
-        this.setState(
-            {
-                activeSkill: {
-                    active: true,
-                    index,
-                    name,
-                    star,
-                    note,
-                    animation: false
-                }
-            },
-            () => {
-                const self = this;
-                setTimeout(() => {
-                    const saveState = self.state.activeSkill;
-                    self.setState({
-                        activeSkill: {
-                            ...saveState,
-                            animation: true
-                        }
-                    });
-                }, 250);
-            }
-        );
-    };
-
-    hideDetails = () => {
-        const activeSkill = this.state.activeSkill;
-        this.setState({
-            activeSkill: {
-                ...activeSkill,
-                active: false,
-                animation: false,
-                index: 0
-            }
-        });
-    };
-
-    getActive = () => {
-        const { active, name, note, animation } = this.state.activeSkill;
-        if (active) {
-            return (
-                <div
-                    className={
-                        'section-skill detail' +
-                        (animation ? ' animation-show' : '')
-                    }
-                >
-                    <h3 className="section-title">{name}</h3>
-                    <div className="section-content">{note}</div>
-                </div>
-            );
-        }
-        return null;
-    };
-
-    render() {
+    getLists = () => {
         const self = this;
-        const activeSkill = self.getActive();
-        return (
-            <React.Fragment>
+        const { animate } = self.state;
+        if (!animate) {
+            return (
                 <div className="section-skill">
-                    <h3 className="section-title">Skills:</h3>
+                    <h3 className="section-title">{this.state.pageTitle}</h3>
                     <div className="section-content">
                         <ul>
                             {this.state.skills.map((el, i) => {
@@ -164,27 +145,37 @@ class Skills extends Component {
                                             (showMore ? showMore + ' ' : '') +
                                             'single-section-wrapper'
                                         }
-                                        onClick={() =>
-                                            self.handleDetails(showMore, i)
-                                        }
                                     >
-                                        <div className="section-info">
-                                            <span className="name">
-                                                {el.name}
+                                        <Link to={'/about/skills/' + el.url}>
+                                            <div className="section-info">
+                                                <span className="name">
+                                                    {el.name}
+                                                </span>
+                                                <span className="ranking">
+                                                    {self.ranking(el.star)}
+                                                </span>
+                                            </div>
+                                            <span className="section-details">
+                                                {el.note}
                                             </span>
-                                            <span className="ranking">
-                                                {self.ranking(el.star)}
-                                            </span>
-                                        </div>
-                                        <span className="section-details">
-                                            {el.note}
-                                        </span>
+                                        </Link>
                                     </li>
                                 );
                             })}
                         </ul>
                     </div>
                 </div>
+            );
+        }
+        return null;
+    };
+
+    render() {
+        const listSkills = this.getLists();
+        const activeSkill = this.getActive();
+        return (
+            <React.Fragment>
+                {listSkills}
                 {activeSkill}
             </React.Fragment>
         );

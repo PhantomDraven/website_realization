@@ -32,8 +32,14 @@ class App extends Component {
             <Router>
                 <React.Fragment>
                     <Route exact path="/" component={Main} />
-                    <Route path="/about" component={About} />
-                    <Route path="/concepts" component={Concepts} />
+                    <Route exact path="/about" component={About} />
+                    <Route
+                        path="/about/skills/:skill"
+                        render={props => (
+                            <About activeSkill={props.match.params.skill} />
+                        )}
+                    />
+                    <Route exact path="/concepts" component={Concepts} />
                 </React.Fragment>
             </Router>
         );
