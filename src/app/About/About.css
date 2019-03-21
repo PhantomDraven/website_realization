@@ -1,0 +1,41 @@
+.section-skill {
+    padding: 10px 0;
+}
+
+.section-skill .section-title {
+    padding-bottom: 3px;
+    border-bottom: 1px solid #2e3532;
+    font-size: 24px;
+}
+
+.section-skill .section-content {
+    position: relative;
+    min-height: 100vh;
+}
+
+.section-skill .section-content ul {
+    padding: 10px 0 10px 40px;
+}
+
+.section-skill .section-content > ul {
+    padding: 0;
+    list-style: none;
+}
+
+.section-skill .section-content > ul > li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #d6eeff;
+}
+
+.section-skill .section-content .section-info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.section-skill .section-content .section-details {
+    font-size: 12px;
+}
