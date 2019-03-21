@@ -34,9 +34,35 @@ class App extends Component {
                     <Route exact path="/" component={Main} />
                     <Route exact path="/about" component={About} />
                     <Route
+                        exact
+                        path="/about/skills"
+                        render={() => (
+                            <About request="Skills" showList="Skills" />
+                        )}
+                    />
+                    <Route
                         path="/about/skills/:skill"
                         render={props => (
-                            <About activeSkill={props.match.params.skill} />
+                            <About
+                                request="Skills"
+                                param={props.match.params.skill}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/about/projects"
+                        render={() => (
+                            <About request="Projects" showList="Projects" />
+                        )}
+                    />
+                    <Route
+                        path="/about/projects/:project"
+                        render={props => (
+                            <About
+                                request="Projects"
+                                param={props.match.params.project}
+                            />
                         )}
                     />
                     <Route exact path="/concepts" component={Concepts} />

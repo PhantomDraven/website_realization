@@ -7,19 +7,17 @@ import Header from '../../core/Header';
 import Footer from '../../core/Footer';
 
 import Skills from './Skills';
+import Skill from './Skill';
 import Projects from './Projects';
+import Project from './Project';
 
 class About extends Component {
     constructor(props) {
         super(props);
 
-        const { activeSkill = false } = this.props;
-
         this.state = {
             title: 'Kevin Statua',
-            subtitle: 'Frontend Developer',
-            job: 'Alpenite S.r.l.',
-            activeSkill
+            subtitle: 'Frontend Developer'
         };
     }
 
@@ -27,7 +25,36 @@ class About extends Component {
         document.title = 'Kevin Statua - About';
     }
 
+    getSkills = list => {
+        if (list) {
+            return <Skills />;
+        }
+        return <Skill requestSkill={this.props.param} />;
+    };
+
+    getProjects = list => {
+        if (list) {
+            return <Projects />;
+        }
+        return <Project requestProject={this.props.param} />;
+    };
+
     render() {
+        const { request = false, showList = false } = this.props;
+        let getProjects, getProject, getSkills, getSkill;
+        if (showList) {
+            if (request === 'Skills') {
+                getSkills = this.getSkills(showList);
+            } else if (request === 'Projects') {
+                getProjects = this.getProjects(showList);
+            }
+        } else {
+            if (request === 'Skills') {
+                getSkill = this.getSkills(showList);
+            } else if (request === 'Projects') {
+                getProject = this.getProjects(showList);
+            }
+        }
         return (
             <React.Fragment>
                 <Header
@@ -35,8 +62,10 @@ class About extends Component {
                     subtitle={this.state.subtitle}
                 />
                 <main className="page-wrapper">
-                    <Skills requestSkill={this.state.activeSkill} />
-                    <Projects />
+                    {getSkills}
+                    {getSkill}
+                    {getProjects}
+                    {getProject}
                 </main>
                 <Footer />
             </React.Fragment>

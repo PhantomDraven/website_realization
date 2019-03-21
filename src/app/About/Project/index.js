@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { projects } from '../data';
 
-class Project extends Component {
+class Projects extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,4 +14,4 @@ class Project extends Component {
     }
 }
 
-export default Project;
+export default Projects;
